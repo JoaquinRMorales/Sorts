@@ -62,7 +62,8 @@ func Analizer() (string, string) {
 	b2 := Scan("Ingrese: 1k | 10k | 100k | 1m ... ")
 
 	for count := 0; count <= 15; count++ {
-		c, d := HeaderReader(a[count])
+		c, d := HeaderReader(a[count]) 
+		//cAux para "du", "ra"...
 		cAux := c[0] + c[1]
 
 		if b == "du" && cAux == b {
