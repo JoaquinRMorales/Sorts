@@ -8,19 +8,10 @@ import (
 	"os"
 	"strconv"
 	"strings"
-	"time"
 )
 
-//------------------------------------------------------------------------------
-
-//------------------------------------------------------------------------------
-func track(start time.Time, name string) {
-	elapsed := time.Since(start)
-	log.Printf("%s took %s", name, elapsed)
-}
-
 //-----------------------------------------------------------------------------
-
+//Input from console
 func Scan(str string) string {
 	print(str, "  ")
 	reader := bufio.NewReader(os.Stdin)
@@ -31,6 +22,7 @@ func Scan(str string) string {
 }
 
 //-------------------------------------------------------------------------------
+//Folder reader
 func readD() ([]string, string) {
 	orden := Scan("Direccion de carpeta ... EJEMPLO /Home/Informatica/tarea2/")
 	files, err := ioutil.ReadDir(orden)
@@ -48,6 +40,7 @@ func readD() ([]string, string) {
 }
 
 //-------------------------------------------------------------------------------
+//Return auxs to the Analizer()
 func HeaderReader(str string) ([]string, string) {
 	a := make([]string, 20)
 	var acumulator string
@@ -59,7 +52,8 @@ func HeaderReader(str string) ([]string, string) {
 }
 
 //-----------------------------------------------------------------------------
-func Analizer() (string, string, string) {
+//Return the final directory to open and the len of the data in string (1k, 10k, 100k, 1m)
+func Analizer() (string, string) {
 
 	var analizado string
 
@@ -102,12 +96,13 @@ func Analizer() (string, string, string) {
 
 	}
 
-	return analizado, orden, b2
+	return analizado, b2
 }
 
 //------------------------------------------------------------------------------
+//Open the file, then split the data and convert it to Int type, return the array of numbers and the leng of the array
 func Stringer() ([]int, uint) {
-	a, _, cant := Analizer()
+	a, cant := Analizer()
 
 	var largo int
 
